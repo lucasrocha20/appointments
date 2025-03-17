@@ -1,6 +1,6 @@
 import type { User } from "../../domain/entities/User";
 
 export interface UserRepository {
-  save(user: User): void;
-  findByEmail(email: string): User | undefined;
+  save(user: User): Promise<void>;
+  findByEmail(email: string): Promise<User | null>;
 }

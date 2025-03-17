@@ -14,14 +14,15 @@ interface CreateUserUseCaseRequest {
 export class CreateUserUseCase {
   constructor(private userRepository: UserRepository) { }
 
-  async execute({ id, name, email, password, avatar_url }: CreateUserUseCaseRequest): Promise<User> {
+  async execute({ id, name, email, password, avatar_url }: CreateUserUseCaseRequest): Promise<void> {
     const generatedId = id ?? randomUUID();
     const hashedPassword = await PasswordHasher.hashPassword(password);
     const user = new User(generatedId, name, email, avatar_url, hashedPassword);
-    this.userRepository.save(user);
-    
-    delete user.password;
 
-    return user;
+    await this.userRepository.save(user);
+    
+    // delete user.password;
+
+    return;
   }
 }

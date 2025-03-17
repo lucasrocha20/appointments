@@ -4,11 +4,15 @@ import type { User } from "../src/domain/entities/User";
 export class InMemoryUserRepository implements UserRepository {
   public users: User[] = [];
 
-  save(user: User): void {
+  async save(user: User): Promise<void> {
     this.users.push(user);
   }
 
-  findByEmail(email: string): User | undefined {
-    return this.users.find(user => user.email === email);
+  async findByEmail(email: string): Promise<User | null> {
+    const user = this.users.find(user => user.email === email);
+
+    if(!user) return null;
+
+    return user;
   }
 }

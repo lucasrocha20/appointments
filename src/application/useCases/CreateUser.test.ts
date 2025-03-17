@@ -11,7 +11,7 @@ describe('Create User', () => {
   })
 
   it('should be able to create an user', async () => {
-    const result = await createUserUseCase.execute({
+    await createUserUseCase.execute({
       id: "1",
       name: "Lucas",
       email: "lucas@test.com",
@@ -19,6 +19,13 @@ describe('Create User', () => {
       avatar_url: "",
     });
 
-    expect(inMemoryUserRepository.users[0]).toEqual(result);
+    const { password, ...rest } = inMemoryUserRepository.users[0];
+
+    expect({...rest}).toEqual({
+      id: "1",
+      name: "Lucas",
+      email: "lucas@test.com",
+      avatar_url: "",
+    });
   });
 });
