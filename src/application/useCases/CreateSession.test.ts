@@ -1,19 +1,22 @@
 import { InMemoryUserRepository } from "test/InMemoryUserRepository";
 import { CreateUserUseCase } from "./CreateUser";
 import { CreateSessionUseCase } from './CreateSession';
+import { JWTService } from "@/infrastructure/security/JWTService";
 
 let inMemoryUserRepository: InMemoryUserRepository;
 let createUserUseCase: CreateUserUseCase;
 let createSessionUseCase: CreateSessionUseCase;
+let jwtService: JWTService;
 
-describe('Create User', () => {
+describe('Create Session', () => {
   beforeEach(() => {
     inMemoryUserRepository = new InMemoryUserRepository();
     createUserUseCase = new CreateUserUseCase(inMemoryUserRepository);
-    createSessionUseCase = new CreateSessionUseCase(inMemoryUserRepository);
+    jwtService = new JWTService();
+    createSessionUseCase = new CreateSessionUseCase(inMemoryUserRepository, jwtService);
   })
 
-  it('should be able to create an user', async () => {
+  it('should be able to create an session', async () => {
     await createUserUseCase.execute({
       id: "1",
       name: "Lucas",
@@ -21,9 +24,14 @@ describe('Create User', () => {
       password: "abc123",
       avatar_url: "",
     });
+    
+    const sessionToken = await createSessionUseCase.execute({ email: "lucas@test.com", password: "abc123" })
 
-    const session = await createSessionUseCase.execute({ email: "lucas@test.com", password: "abc123" })
+    const jwtDecoded = await jwtService.verifyToken(sessionToken || '');
 
-    console.log("session", session)
+    expect(jwtDecoded).toHaveProperty('userId');
+    expect(jwtDecoded).toHaveProperty('email');
+    expect(jwtDecoded?.userId).toBe('1');
+    expect(jwtDecoded?.email).toBe('lucas@test.com');
   });
 });
