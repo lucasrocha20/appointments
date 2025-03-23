@@ -1,7 +1,7 @@
-import { UserRepository } from "../src/application/ports/UserRepository";
-import type { User } from "../src/domain/entities/User";
+import { IUserRepository } from "@/core/application/ports/UserRepository";
+import type { User } from "@/core/domain/entities/User";
 
-export class InMemoryUserRepository implements UserRepository {
+export class InMemoryUserRepository implements IUserRepository {
   public users: User[] = [];
 
   async save(user: User): Promise<void> {

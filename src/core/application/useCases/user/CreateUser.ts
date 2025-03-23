@@ -1,5 +1,5 @@
-import { User } from "../../domain/entities/User";
-import { UserRepository } from "../ports/UserRepository";
+import { User } from "@/core/domain/entities/User";
+import { IUserRepository } from "@/core/application/ports/UserRepository";
 import { randomUUID } from "node:crypto";
 import { PasswordHasher } from "@/infra/PasswordHasher";
 
@@ -12,7 +12,7 @@ interface CreateUserUseCaseRequest {
 }
 
 export class CreateUserUseCase {
-  constructor(private userRepository: UserRepository) { }
+  constructor(private userRepository: IUserRepository) { }
 
   async execute({ id, name, email, password, avatar_url }: CreateUserUseCaseRequest): Promise<void> {
     const generatedId = id ?? randomUUID();

@@ -1,5 +1,5 @@
 import { InMemoryUserRepository } from "test/InMemoryUserRepository";
-import { CreateUserUseCase } from "./CreateUser";
+import { CreateUserUseCase } from "../user/CreateUser";
 import { CreateSessionUseCase } from './CreateSession';
 import { JWTService } from "@/infra/security/JWTService";
 

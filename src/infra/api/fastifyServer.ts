@@ -1,4 +1,5 @@
 import fastify, { type FastifyInstance, type RouteShorthandOptions } from "fastify";
+import { userController } from "./routes/userRoute";
 // import fastifyCors from "fastify-cors";
 
 const server: FastifyInstance = fastify({
@@ -22,9 +23,7 @@ const server: FastifyInstance = fastify({
 
 // server.register(fastifyCors, { origin: true })
 
-server.post('/user', async (request, reply) => {
-  return "Hello world"
-});
+server.register(userController, { prefix: 'v1' })
 
 export async function start() {
   try {
