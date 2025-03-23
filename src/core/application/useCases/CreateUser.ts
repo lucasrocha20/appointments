@@ -1,7 +1,7 @@
 import { User } from "../../domain/entities/User";
 import { UserRepository } from "../ports/UserRepository";
 import { randomUUID } from "node:crypto";
-import { PasswordHasher } from "@/infrastructure/PasswordHasher";
+import { PasswordHasher } from "@/infra/PasswordHasher";
 
 interface CreateUserUseCaseRequest {
   id?: string,

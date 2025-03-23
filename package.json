@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/infrastructure/api/fastifyServer | pino-pretty",
+    "dev": "tsx watch src | pino-pretty",
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src --ext .ts",
@@ -15,6 +15,7 @@
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "fastify": "^5.2.1",
+    "fastify-cors": "^6.0.3",
     "jsonwebtoken": "^9.0.2",
     "pino-pretty": "^13.0.0",
     "tsx": "^4.19.3"

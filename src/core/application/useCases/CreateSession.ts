@@ -1,6 +1,6 @@
-import { PasswordHasher } from "@/infrastructure/PasswordHasher";
+import { PasswordHasher } from "@/infra/PasswordHasher";
 import type { UserRepository } from "../ports/UserRepository";
-import type { JWTService } from "@/infrastructure/security/JWTService";
+import type { JWTService } from "@/infra/security/JWTService";
 
 export class CreateSessionUseCase {
   constructor(
