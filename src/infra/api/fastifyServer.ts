@@ -27,7 +27,7 @@ server.register(userController, { prefix: 'v1' })
 
 export async function start() {
   try {
-    await server.listen({port: 3000 });
+    await server.listen({port: 3333 });
   } catch (err) {
     console.error(err)
     process.exit(0)    

@@ -7,7 +7,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint src --ext .ts",
-    "lint:fix": "eslint src --ext .ts --fix"
+    "lint:fix": "eslint src --ext .ts --fix",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:create": "typeorm-ts-node-commonjs migration:create ./src/infra/database/typeorm/migrations/",
+    "migration:run": "typeorm-ts-node-commonjs migration:run -d=./src/infra/database/typeorm/",
+    "migration:revert": "typeorm-ts-node-commonjs migration:revert -d=./src/infra/database/typeorm/"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +21,9 @@
     "fastify": "^5.2.1",
     "fastify-cors": "^6.0.3",
     "jsonwebtoken": "^9.0.2",
+    "mysql": "^2.18.1",
     "pino-pretty": "^13.0.0",
+    "reflect-metadata": "^0.2.2",
     "tsx": "^4.19.3",
     "typeorm": "^0.3.21"
   },
@@ -29,6 +35,7 @@
     "eslint-plugin-vitest-globals": "^1.5.0",
     "install": "^0.13.0",
     "npm": "^11.2.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.2",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.0.8"
