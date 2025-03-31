@@ -1,5 +1,4 @@
-CREATE SCHEMA appointments;
-GRANT ALL PRIVILEGES ON appointments.* TO
-'user_appointments'@'%';
-FLUSH
-PRIVILEGES;
+CREATE DATABASE IF NOT EXISTS appointments;
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY 'root' WITH GRANT OPTION;
+FLUSH PRIVILEGES;

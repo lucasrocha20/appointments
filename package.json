@@ -10,7 +10,7 @@
     "lint:fix": "eslint src --ext .ts --fix",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:create": "typeorm-ts-node-commonjs migration:create ./src/infra/database/typeorm/migrations/",
-    "migration:run": "typeorm-ts-node-commonjs migration:run -d=./src/infra/database/typeorm/",
+    "migration:run": "typeorm-ts-node-commonjs migration:run -d=./src/infra/database/typeorm/index",
     "migration:revert": "typeorm-ts-node-commonjs migration:revert -d=./src/infra/database/typeorm/"
   },
   "author": "",
@@ -21,7 +21,7 @@
     "fastify": "^5.2.1",
     "fastify-cors": "^6.0.3",
     "jsonwebtoken": "^9.0.2",
-    "mysql": "^2.18.1",
+    "mysql2": "^3.14.0",
     "pino-pretty": "^13.0.0",
     "reflect-metadata": "^0.2.2",
     "tsx": "^4.19.3",
