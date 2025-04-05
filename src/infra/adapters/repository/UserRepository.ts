@@ -1,16 +1,19 @@
 import { IUserRepository } from "@/core/application/ports/UserRepository";
 import { User } from "@/core/domain/entities/User";
 import { AppDataSource } from "@/infra/database/typeorm";
+import { Users } from "@/infra/database/typeorm/entities/Users"
 
 export class UserRepository implements IUserRepository {
-    async save(user: User): Promise<void> {
-        // throw new Error("Method not implemented.");
-        console.log("teste")
-        await AppDataSource.manager.save(user)
-        
-    }
-    findByEmail(email: string): Promise<User | null> {
-        throw new Error("Method not implemented.");
-    }
+    constructor(private usersRepository = AppDataSource.getRepository(Users)) {}
 
+    async save(user: Users): Promise<void> {
+        await this.usersRepository.save(user)
+    }
+    async findByEmail(email: string): Promise<User | null> {
+        const user = await AppDataSource.manager.findOneBy(User, { 
+            email
+        });
+
+        return user || null;
+    }
 }
