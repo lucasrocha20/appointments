@@ -4,7 +4,9 @@ export class User {
     public name: string,
     public email: string,
     public avatar_url: string,
-    public password?: string | null,
+    public password: string,
+    public readonly created_at?: Date,
+    public readonly updated_at?: Date,
   ) {
     if (!this.isValidEmail(email)) {
       throw new Error("Invalid email");

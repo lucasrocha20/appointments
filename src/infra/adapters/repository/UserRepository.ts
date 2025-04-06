@@ -6,11 +6,12 @@ import { Users } from "@/infra/database/typeorm/entities/Users"
 export class UserRepository implements IUserRepository {
     constructor(private usersRepository = AppDataSource.getRepository(Users)) {}
 
-    async save(user: Users): Promise<void> {
-        await this.usersRepository.save(user)
+    async save(user: User): Promise<void> {
+        const createdUser = this.usersRepository.create(user);
+        await this.usersRepository.save(createdUser)
     }
-    async findByEmail(email: string): Promise<User | null> {
-        const user = await AppDataSource.manager.findOneBy(User, { 
+    async findByEmail(email: string): Promise<Users | null> {
+        const user = await AppDataSource.manager.findOneBy(Users, { 
             email
         });
 

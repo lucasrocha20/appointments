@@ -1,7 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, BaseEntity, CreateDateColumn, UpdateDateColumn } from "typeorm"
 
-@Entity()
-export class Users {
+@Entity('users')
+export class Users extends BaseEntity {
     @PrimaryGeneratedColumn('uuid')
     public id: string;
 
@@ -17,15 +17,9 @@ export class Users {
     @Column('varchar')
     public password: string;
 
-    @Column({
-        type: 'varchar',
-        default: ''
-    })
-    public created_at: string;
+    @CreateDateColumn()
+    public created_at: Date;
 
-    @Column({
-        type: 'varchar',
-        nullable: true,
-    })
-    public updated_at: string;
+    @UpdateDateColumn()
+    public updated_at: Date;
 }
