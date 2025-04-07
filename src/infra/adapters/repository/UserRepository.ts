@@ -10,6 +10,7 @@ export class UserRepository implements IUserRepository {
         const createdUser = this.usersRepository.create(user);
         await this.usersRepository.save(createdUser)
     }
+
     async findByEmail(email: string): Promise<Users | null> {
         const user = await AppDataSource.manager.findOneBy(Users, { 
             email

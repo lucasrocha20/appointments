@@ -14,18 +14,23 @@ export interface CreateUserUseCaseRequest {
 export class CreateUserUseCase {
   constructor(private userRepository: IUserRepository) { }
 
-  async execute({ id, name, email, password, avatar_url }: CreateUserUseCaseRequest): Promise<void> {
+  async execute({ id, name, email, password, avatar_url }: CreateUserUseCaseRequest): Promise<boolean> {
     const generatedId = id ?? randomUUID();
     const hashedPassword = await PasswordHasher.hashPassword(password);
 
-    // todo: Verify if exists
+    const existsUser = await this.userRepository.findByEmail(email);
 
+    if (existsUser) {
+      return false;
+    }
+
+    // todo: Adicionar mensagem de erro
     const user = new User(generatedId, name, email, avatar_url, hashedPassword);
 
     await this.userRepository.save(user);
     
     // delete user.password;
 
-    return;
+    return true;
   }
 }

@@ -11,7 +11,7 @@ export class User1743285412571 implements MigrationInterface {
                 password VARCHAR(100),
                 avatar_url VARCHAR(100),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
                 status TINYINT(1) DEFAULT 1
             );`
         )

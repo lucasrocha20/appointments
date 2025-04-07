@@ -15,12 +15,16 @@ const userController: FastifyPluginCallback = (fastify, _, next) => {
             avatar_url = ""
         } = request.body;
 
-        await createUser.execute({
+        const userCreated = await createUser.execute({
             name,
             email,
             avatar_url,
             password
         })
+
+        if(!userCreated) {
+            return reply.status(400).send()
+        }
 
         reply.status(201).send()
     })
